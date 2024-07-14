@@ -231,6 +231,7 @@ func (vm *VM) StorageAt(addr common.Address, slot common.Hash) (common.Hash, err
 func (vm *VM) CallAccessList(contract common.Address, data []byte, blockNumber *big.Int) (*types.AccessList, error) {
 	// Add the contract address to the access list using the state DB method
 	vm.db.AddAddressToAccessList(contract)
+	///////////////
 
 	// Create a message to perform the call
 	msg := &w3types.Message{To: &contract, Input: data}
