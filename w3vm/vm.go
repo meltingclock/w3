@@ -233,10 +233,7 @@ func (vm *VM) CallAccessList(contract common.Address, data []byte, blockNumber *
 	vm.db.AddAddressToAccessList(contract)
 
 	// Create a message to perform the call
-	msg := &w3types.Message{
-		To:    &contract,
-		Input: data,
-	}
+	msg := &w3types.Message{To: &contract, Input: data}
 
 	// Perform the call
 	receipt, err := vm.Call(msg)
