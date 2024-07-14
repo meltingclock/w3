@@ -244,9 +244,16 @@ func (vm *VM) CreateAccessListRPC(msg *w3types.Message, blockNumber *big.Int) (*
 }
 
 // CreateAccessList generates an access list for the given contract call.
-func (vm *VM) CreateAccessList(contract common.Address, data []byte) (*types.AccessList, error) {
+func (vm *VM) CreateAccessList(tx *w3types.Message) (*types.AccessList, error) {
 	// Create a message to perform the call
-	msg := &w3types.Message{To: &contract, Input: data}
+	msg := &w3types.Message{
+		From:     tx.From,
+		To:       tx.To,
+		GasPrice: tx.GasPrice,
+		Gas:      tx.Gas,
+		Value:    tx.Value,
+		Input:    tx.Input,
+	}
 
 	// Apply the message to the VM to simulate the call and collect access list
 	receipt, err := vm.apply(msg, true, nil)
