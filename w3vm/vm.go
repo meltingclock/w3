@@ -228,9 +228,9 @@ func (vm *VM) StorageAt(addr common.Address, slot common.Hash) (common.Hash, err
 }
 
 // CreateAccessList generates an access list for the given contract call using eth_createAccessList RPC method.
-func (vm *VM) CreateAccessListRPC(contract common.Address, data []byte, blockNumber *big.Int) (*types.AccessList, error) {
+func (vm *VM) CreateAccessListRPC(msg *w3types.Message, blockNumber *big.Int) (*types.AccessList, error) {
 	// Prepare the RPC call
-	caller := ethCreateAccessList(contract, data, blockNumber)
+	caller := ethCreateAccessList(msg, blockNumber)
 
 	// Create a variable to hold the result
 	var accessList types.AccessList

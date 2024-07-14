@@ -93,19 +93,29 @@ func ethStorageAt(addr common.Address, slot common.Hash, blockNumber *big.Int) w
 	)
 }
 
+type AccessList struct {
+	From     common.Address `json:"from"`
+	To       common.Address `json:"to"`
+	Gas      hexutil.Uint64 `json:"gas"`
+	GasPrice *hexutil.Big   `json:"gasPrice"`
+	Value    *hexutil.Big   `json:"value"`
+	Data     hexutil.Bytes  `json:"data"`
+}
+
 // ethCreateAccessList implements the eth_createAccessList RPC call.
-func ethCreateAccessList(addr common.Address, data []byte, blockNumber *big.Int) w3types.RPCCallerFactory[types.AccessList] {
-	callMsg := map[string]interface{}{
-		"to":   addr,
-		"data": hexutil.Bytes(data),
-	}
-	if blockNumber != nil {
-		callMsg["blockNumber"] = module.BlockNumberArg(blockNumber)
+func ethCreateAccessList(msg *w3types.Message, blockNumber *big.Int) w3types.RPCCallerFactory[types.AccessList] {
+	callMsg := &AccessList{
+		From:     msg.From,
+		To:       *msg.To,
+		Gas:      hexutil.Uint64(msg.Gas),
+		GasPrice: (*hexutil.Big)(msg.GasPrice),
+		Value:    (*hexutil.Big)(msg.Value),
+		Data:     msg.Input,
 	}
 
 	return module.NewFactory(
 		"eth_createAccessList",
-		[]any{callMsg},
+		[]any{callMsg, module.BlockNumberArg(blockNumber)},
 		module.WithRetWrapper(func(ret *types.AccessList) any { return ret }),
 	)
 }
