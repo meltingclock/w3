@@ -97,7 +97,7 @@ func ethStorageAt(addr common.Address, slot common.Hash, blockNumber *big.Int) w
 func ethCreateAccessList(addr common.Address, data []byte, blockNumber *big.Int) w3types.RPCCallerFactory[types.AccessList] {
 	callMsg := map[string]interface{}{
 		"to":   addr,
-		"data": data,
+		"data": hexutil.Bytes(data),
 	}
 	if blockNumber != nil {
 		callMsg["blockNumber"] = module.BlockNumberArg(blockNumber)
