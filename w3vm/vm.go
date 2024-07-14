@@ -227,26 +227,56 @@ func (vm *VM) StorageAt(addr common.Address, slot common.Hash) (common.Hash, err
 	return val, nil
 }
 
-// CallAccessList adds the contract address to the access list and performs the call.
-func (vm *VM) CallAccessList(contract common.Address, data []byte, blockNumber *big.Int) (*types.AccessList, error) {
-	// Add the contract address to the access list using the state DB method
-	vm.db.AddAddressToAccessList(contract)
-	///////////////
+// CreateAccessList generates an access list for the given contract call using eth_createAccessList RPC method.
+func (vm *VM) CreateAccessListRPC(contract common.Address, data []byte, blockNumber *big.Int) (*types.AccessList, error) {
+	// Prepare the RPC call
+	caller := ethCreateAccessList(contract, data, blockNumber)
 
+	// Create a variable to hold the result
+	var accessList types.AccessList
+
+	// Execute the RPC call
+	if err := vm.opts.forkClient.Call(caller.Returns(&accessList)); err != nil {
+		return nil, fmt.Errorf("failed to create access list: %w", err)
+	}
+
+	return &accessList, nil
+}
+
+// CreateAccessList generates an access list for the given contract call.
+func (vm *VM) CreateAccessList(contract common.Address, data []byte) (*types.AccessList, error) {
 	// Create a message to perform the call
 	msg := &w3types.Message{To: &contract, Input: data}
 
-	// Perform the call
-	receipt, err := vm.Call(msg)
+	// Apply the message to the VM to simulate the call and collect access list
+	receipt, err := vm.apply(msg, true, nil)
 	if err != nil {
 		return nil, err
 	}
 
-	var accessList types.AccessList
-	if err := receipt.DecodeReturns(&accessList); err != nil {
-		return nil, err
+	// Initialize the access list
+	accessList := types.AccessList{}
+
+	// Use a map to avoid duplicate entries
+	addressMap := make(map[common.Address]map[common.Hash]struct{})
+
+	// Collect accessed addresses and storage slots from the receipt logs
+	for _, log := range receipt.Logs {
+		if _, ok := addressMap[log.Address]; !ok {
+			addressMap[log.Address] = make(map[common.Hash]struct{})
+		}
 	}
 
+	// Iterate over the state to find accessed storage slots
+	for addr, slots := range addressMap {
+		accessTuple := types.AccessTuple{Address: addr}
+		for slot := range slots {
+			accessTuple.StorageKeys = append(accessTuple.StorageKeys, slot)
+		}
+		accessList = append(accessList, accessTuple)
+	}
+
+	// Return the collected access list
 	return &accessList, nil
 }
 
