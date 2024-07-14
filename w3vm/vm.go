@@ -227,6 +227,31 @@ func (vm *VM) StorageAt(addr common.Address, slot common.Hash) (common.Hash, err
 	return val, nil
 }
 
+// CallAccessList adds the contract address to the access list and performs the call.
+func (vm *VM) CallAccessList(contract common.Address, data []byte, blockNumber *big.Int) (*types.AccessList, error) {
+	// Add the contract address to the access list using the state DB method
+	vm.db.AddAddressToAccessList(contract)
+
+	// Create a message to perform the call
+	msg := &w3types.Message{
+		To:    &contract,
+		Input: data,
+	}
+
+	// Perform the call
+	receipt, err := vm.Call(msg)
+	if err != nil {
+		return nil, err
+	}
+
+	var accessList types.AccessList
+	if err := receipt.DecodeReturns(&accessList); err != nil {
+		return nil, err
+	}
+
+	return &accessList, nil
+}
+
 // Snapshot the current state of the VM. The returned state can only be rolled
 // back to once. Use [state.StateDB.Copy] if you need to rollback multiple times.
 func (vm *VM) Snapshot() *state.StateDB { return vm.db.Copy() }
