@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/ethereum/go-ethereum/accounts/abi"
-	"github.com/lmittmann/w3/internal/crypto"
+	"github.com/meltingclock/w3/internal/crypto"
 )
 
 // Arguments represents a slice of [abi.Argument]'s.

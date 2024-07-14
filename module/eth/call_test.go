@@ -6,10 +6,10 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/lmittmann/w3"
-	"github.com/lmittmann/w3/module/eth"
-	"github.com/lmittmann/w3/rpctest"
-	"github.com/lmittmann/w3/w3types"
+	"github.com/meltingclock/w3"
+	"github.com/meltingclock/w3/module/eth"
+	"github.com/meltingclock/w3/rpctest"
+	"github.com/meltingclock/w3/w3types"
 )
 
 var funcBalanceOf = w3.MustNewFunc("balanceOf(address)", "uint256")

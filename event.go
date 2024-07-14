@@ -7,7 +7,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
-	_abi "github.com/lmittmann/w3/internal/abi"
+	_abi "github.com/meltingclock/w3/internal/abi"
 )
 
 // Event represents a Smart Contract event decoder.

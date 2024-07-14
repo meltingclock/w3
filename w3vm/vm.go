@@ -24,9 +24,9 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/holiman/uint256"
-	"github.com/lmittmann/w3"
-	"github.com/lmittmann/w3/module/eth"
-	"github.com/lmittmann/w3/w3types"
+	"github.com/meltingclock/w3"
+	"github.com/meltingclock/w3/module/eth"
+	"github.com/meltingclock/w3/w3types"
 )
 
 var (

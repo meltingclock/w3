@@ -6,7 +6,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"github.com/lmittmann/w3/w3types"
+	"github.com/meltingclock/w3/w3types"
 )
 
 func TestStateMerge(t *testing.T) {

@@ -7,9 +7,9 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/lmittmann/w3"
-	"github.com/lmittmann/w3/module/eth"
-	"github.com/lmittmann/w3/rpctest"
+	"github.com/meltingclock/w3"
+	"github.com/meltingclock/w3/module/eth"
+	"github.com/meltingclock/w3/rpctest"
 )
 
 func TestBlockByHash(t *testing.T) {

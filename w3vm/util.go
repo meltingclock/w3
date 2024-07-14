@@ -13,12 +13,12 @@ import (
 	"github.com/ethereum/go-ethereum/core/tracing"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/holiman/uint256"
-	"github.com/lmittmann/w3"
-	"github.com/lmittmann/w3/internal/crypto"
-	w3hexutil "github.com/lmittmann/w3/internal/hexutil"
-	"github.com/lmittmann/w3/internal/mod"
-	"github.com/lmittmann/w3/internal/module"
-	"github.com/lmittmann/w3/w3types"
+	"github.com/meltingclock/w3"
+	"github.com/meltingclock/w3/internal/crypto"
+	w3hexutil "github.com/meltingclock/w3/internal/hexutil"
+	"github.com/meltingclock/w3/internal/mod"
+	"github.com/meltingclock/w3/internal/module"
+	"github.com/meltingclock/w3/w3types"
 )
 
 // RandA returns a random address.
@@ -90,6 +90,23 @@ func ethStorageAt(addr common.Address, slot common.Hash, blockNumber *big.Int) w
 		"eth_getStorageAt",
 		[]any{addr, slot, module.BlockNumberArg(blockNumber)},
 		module.WithRetWrapper(func(ret *common.Hash) any { return (*w3hexutil.Hash)(ret) }),
+	)
+}
+
+// ethCreateAccessList implements the eth_createAccessList RPC call.
+func ethCreateAccessList(addr common.Address, data []byte, blockNumber *big.Int) w3types.RPCCallerFactory[types.AccessList] {
+	callMsg := map[string]interface{}{
+		"to":   addr,
+		"data": data,
+	}
+	if blockNumber != nil {
+		callMsg["blockNumber"] = module.BlockNumberArg(blockNumber)
+	}
+
+	return module.NewFactory(
+		"eth_createAccessList",
+		[]any{callMsg},
+		module.WithRetWrapper(func(ret *types.AccessList) any { return ret }),
 	)
 }
 

@@ -3,7 +3,7 @@ package eth
 import (
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/lmittmann/w3/w3types"
+	"github.com/meltingclock/w3/w3types"
 )
 
 // NewHeads subscribes to notifications of updates to the blockchain head.

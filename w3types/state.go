@@ -10,7 +10,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/lmittmann/w3/internal/crypto"
+	"github.com/meltingclock/w3/internal/crypto"
 )
 
 type State map[common.Address]*Account

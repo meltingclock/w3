@@ -10,7 +10,7 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"github.com/lmittmann/w3"
+	"github.com/meltingclock/w3"
 )
 
 func ExampleEvent_DecodeArgs() {

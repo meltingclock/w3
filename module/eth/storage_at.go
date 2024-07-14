@@ -4,8 +4,8 @@ import (
 	"math/big"
 
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/lmittmann/w3/internal/module"
-	"github.com/lmittmann/w3/w3types"
+	"github.com/meltingclock/w3/internal/module"
+	"github.com/meltingclock/w3/w3types"
 )
 
 // StorageAt requests the storage of the given common.Address addr at the

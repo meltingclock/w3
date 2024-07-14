@@ -7,7 +7,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/crypto"
-	_abi "github.com/lmittmann/w3/internal/abi"
+	_abi "github.com/meltingclock/w3/internal/abi"
 )
 
 var (

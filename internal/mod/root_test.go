@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/lmittmann/w3/internal/mod"
+	"github.com/meltingclock/w3/internal/mod"
 )
 
 func TestModRoot(t *testing.T) {

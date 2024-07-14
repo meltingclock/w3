@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/lmittmann/w3/internal/hexutil"
+	"github.com/meltingclock/w3/internal/hexutil"
 )
 
 var hashTests = []struct {

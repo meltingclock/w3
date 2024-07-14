@@ -5,10 +5,10 @@ import (
 
 	"github.com/ethereum/go-ethereum/core/vm"
 	"github.com/holiman/uint256"
-	"github.com/lmittmann/w3"
-	"github.com/lmittmann/w3/module/debug"
-	"github.com/lmittmann/w3/rpctest"
-	"github.com/lmittmann/w3/w3types"
+	"github.com/meltingclock/w3"
+	"github.com/meltingclock/w3/module/debug"
+	"github.com/meltingclock/w3/rpctest"
+	"github.com/meltingclock/w3/w3types"
 )
 
 func TestTraceTx(t *testing.T) {

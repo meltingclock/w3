@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/lmittmann/w3"
+	"github.com/meltingclock/w3"
 )
 
 func ExampleI() {

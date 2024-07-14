@@ -6,9 +6,9 @@ import (
 	"testing"
 
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/lmittmann/w3"
-	"github.com/lmittmann/w3/module/eth"
-	"github.com/lmittmann/w3/rpctest"
+	"github.com/meltingclock/w3"
+	"github.com/meltingclock/w3/module/eth"
+	"github.com/meltingclock/w3/rpctest"
 )
 
 var header15050036 = &types.Header{

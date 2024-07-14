@@ -7,9 +7,9 @@ import (
 	"testing"
 
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/lmittmann/w3"
-	"github.com/lmittmann/w3/w3types"
-	"github.com/lmittmann/w3/w3vm"
+	"github.com/meltingclock/w3"
+	"github.com/meltingclock/w3/w3types"
+	"github.com/meltingclock/w3/w3vm"
 )
 
 func TestWETHBalanceSlot(t *testing.T) {
